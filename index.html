@@ -134,6 +134,7 @@
   .cat-portfolio { background: rgba(139,92,246,0.08); border-left: 3px solid var(--purple); }
   .cat-accounting { background: rgba(6,182,212,0.08); border-left: 3px solid var(--cyan); }
   .cat-compliance { background: rgba(239,68,68,0.08); border-left: 3px solid var(--red); }
+  .cat-debt { background: rgba(20,184,166,0.08); border-left: 3px solid #14b8a6; }
 
   /* ACTIVITY FEED */
   .activity-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
@@ -185,10 +186,11 @@
   <a class="sidebar-link" onclick="showSection('portfolio')"><span class="icon">📈</span> Portfolio Management</a>
   <a class="sidebar-link" onclick="showSection('accounting')"><span class="icon">🧾</span> Accounting & Finance</a>
   <a class="sidebar-link" onclick="showSection('compliance')"><span class="icon">⚖️</span> Compliance</a>
+  <a class="sidebar-link" onclick="showSection('debt')"><span class="icon">🏦</span> Debt & Credit</a>
 
   <div class="sidebar-section">Resources</div>
   <a class="sidebar-link" href="blueprint.html" target="_blank"><span class="icon">🤖</span> AI Blueprint</a>
-  <a class="sidebar-link" href="https://github.com/danbucpa/vantara-pe-blueprint" target="_blank"><span class="icon">💻</span> GitHub Repo</a>
+  <a class="sidebar-link" href="https://github.com/danbucpa/vantara-pe" target="_blank"><span class="icon">💻</span> GitHub Repo</a>
 
   <div class="sidebar-fund">
     <div class="fund-status"><div class="dot"></div> Fund Active</div>
@@ -256,6 +258,7 @@
         <a class="quick-link" onclick="showSection('portfolio')">📈 100-Day Plan</a>
         <a class="quick-link" onclick="showSection('accounting')">🧾 Fund Model</a>
         <a class="quick-link" onclick="showSection('compliance')">⚖️ Compliance</a>
+        <a class="quick-link" onclick="showSection('debt')">🏦 Debt & Credit</a>
       </div>
 
       <div class="bottom-grid">
@@ -310,6 +313,12 @@
                 <td style="text-align:center;color:var(--muted);">4</td>
                 <td style="text-align:center;"><span style="background:rgba(148,163,184,0.15);color:#94a3b8;padding:2px 8px;border-radius:8px;font-size:0.7rem;">Coming Soon</span></td>
                 <td style="text-align:right;"><a href="#" onclick="showSection('compliance')" style="color:var(--accent);font-size:0.75rem;">View →</a></td>
+              </tr>
+              <tr style="border-top:1px solid var(--border);">
+                <td style="padding:10px 0;">🏦 Debt & Credit</td>
+                <td style="text-align:center;color:var(--muted);">6</td>
+                <td style="text-align:center;"><span style="background:rgba(148,163,184,0.15);color:#94a3b8;padding:2px 8px;border-radius:8px;font-size:0.7rem;">Coming Soon</span></td>
+                <td style="text-align:right;"><a href="#" onclick="showSection('debt')" style="color:var(--accent);font-size:0.75rem;">View →</a></td>
               </tr>
             </tbody>
           </table>
@@ -591,14 +600,65 @@
       </div>
     </div>
 
+    <!-- DEBT & CREDIT SECTION -->
+    <div id="section-debt" style="display:none;">
+      <div class="cat-header cat-debt"><span class="cat-icon">🏦</span><span class="cat-title">Debt & Credit</span><span class="cat-desc">Fund-level & deal-level financing documents</span></div>
+
+      <!-- Sub-label: Fund Level -->
+      <div style="font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;color:#14b8a6;margin:0 0 12px;padding:0 4px;">FUND-LEVEL DEBT</div>
+      <div class="doc-grid" style="margin-bottom:28px;">
+        <div class="doc-card" onclick="openDoc('debt/subscription-credit-facility.docx')">
+          <div class="doc-card-top"><div class="doc-icon">🏛️</div><span class="doc-type-badge type-docx">DOCX</span></div>
+          <div class="doc-name">Subscription Credit Facility Agreement</div>
+          <div class="doc-desc">Fund-level revolving credit line backed by LP capital commitments. Used to bridge capital calls and manage timing of LP drawdowns.</div>
+          <div class="doc-footer"><span class="doc-date">Coming soon</span><span class="doc-status status-soon">Coming Soon</span></div>
+        </div>
+        <div class="doc-card" onclick="openDoc('debt/fund-guaranty-agreement.docx')">
+          <div class="doc-card-top"><div class="doc-icon">📄</div><span class="doc-type-badge type-docx">DOCX</span></div>
+          <div class="doc-name">Fund Guaranty Agreement</div>
+          <div class="doc-desc">GP guarantee supporting the subscription credit facility. Defines recourse provisions and GP obligations to the lender.</div>
+          <div class="doc-footer"><span class="doc-date">Coming soon</span><span class="doc-status status-soon">Coming Soon</span></div>
+        </div>
+      </div>
+
+      <!-- Sub-label: Deal Level -->
+      <div style="font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;color:#14b8a6;margin:0 0 12px;padding:0 4px;">DEAL-LEVEL DEBT (PORTFOLIO COMPANY)</div>
+      <div class="doc-grid">
+        <div class="doc-card" onclick="openDoc('debt/senior-credit-agreement.docx')">
+          <div class="doc-card-top"><div class="doc-icon">📄</div><span class="doc-type-badge type-docx">DOCX</span></div>
+          <div class="doc-name">Senior Secured Credit Agreement</div>
+          <div class="doc-desc">Primary LBO debt agreement between the portfolio company and senior lender. Covers term loan, revolving credit, covenants, and events of default. (Durafield: $13.9M)</div>
+          <div class="doc-footer"><span class="doc-date">Coming soon</span><span class="doc-status status-soon">Coming Soon</span></div>
+        </div>
+        <div class="doc-card" onclick="openDoc('debt/security-agreement.docx')">
+          <div class="doc-card-top"><div class="doc-icon">📄</div><span class="doc-type-badge type-docx">DOCX</span></div>
+          <div class="doc-name">Security Agreement & Pledge</div>
+          <div class="doc-desc">Grants the senior lender a first-priority security interest in all assets of the portfolio company, including equity pledges from the fund.</div>
+          <div class="doc-footer"><span class="doc-date">Coming soon</span><span class="doc-status status-soon">Coming Soon</span></div>
+        </div>
+        <div class="doc-card" onclick="openDoc('debt/intercreditor-agreement.docx')">
+          <div class="doc-card-top"><div class="doc-icon">📄</div><span class="doc-type-badge type-docx">DOCX</span></div>
+          <div class="doc-name">Intercreditor Agreement</div>
+          <div class="doc-desc">Governs priority and rights between senior and subordinated lenders. Critical when the deal includes both bank debt and mezzanine financing.</div>
+          <div class="doc-footer"><span class="doc-date">Coming soon</span><span class="doc-status status-soon">Coming Soon</span></div>
+        </div>
+        <div class="doc-card" onclick="openDoc('debt/debt-covenant-tracker.xlsx')">
+          <div class="doc-card-top"><div class="doc-icon">📊</div><span class="doc-type-badge type-xlsx">XLSX</span></div>
+          <div class="doc-name">Debt Covenant Tracker</div>
+          <div class="doc-desc">Monthly tracking model for all financial covenants (leverage ratio, DSCR, fixed charge coverage). Auto-flags covenant breaches for each portco.</div>
+          <div class="doc-footer"><span class="doc-date">Coming soon</span><span class="doc-status status-soon">Coming Soon</span></div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
 <script>
-  const BASE = 'https://github.com/danbucpa/vantara-pe-blueprint/raw/main/';
+  const BASE = 'https://github.com/danbucpa/vantara-pe/raw/main/';
 
   function showSection(name) {
-    const sections = ['home','legal','fundraising','deals','portfolio','accounting','compliance'];
+    const sections = ['home','legal','fundraising','deals','portfolio','accounting','compliance','debt'];
     const titles = {
       home: '🏠 Fund Dashboard',
       legal: '📜 Legal & Fund Formation',
@@ -606,7 +666,8 @@
       deals: '🤝 Deal Execution',
       portfolio: '📈 Portfolio Management',
       accounting: '🧾 Accounting & Finance',
-      compliance: '⚖️ Compliance'
+      compliance: '⚖️ Compliance',
+      debt: '🏦 Debt & Credit'
     };
     sections.forEach(s => {
       document.getElementById('section-' + s).style.display = s === name ? 'block' : 'none';
