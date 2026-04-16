@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vantara Capital Partners — AI-Powered PE Firm Blueprint</title>
+<style>
+  :root {
+    --navy: #0a1628;
+    --dark: #0d1f3c;
+    --blue: #1a3a6b;
+    --accent: #2563eb;
+    --gold: #f59e0b;
+    --green: #10b981;
+    --light: #f8fafc;
+    --muted: #94a3b8;
+    --card: #111f3d;
+    --border: #1e3a5f;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--navy); color: #e2e8f0; font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.7; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; width: 100%; background: rgba(10,22,40,0.95); backdrop-filter: blur(10px); z-index: 100; border-bottom: 1px solid var(--border); }
+  .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; height: 60px; }
+  .nav-logo { font-size: 1rem; font-weight: 700; color: var(--gold); letter-spacing: 1px; }
+  .nav-links { display: flex; gap: 20px; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; letter-spacing: 0.5px; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* SECTIONS */
+  section { max-width: 1200px; margin: 0 auto; padding: 80px 24px; }
+  .section-label { font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+  h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.15; }
+  h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; margin-bottom: 16px; }
+  h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+  p { color: #cbd5e1; margin-bottom: 12px; }
+
+  /* HERO */
+  #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 80px; position: relative; overflow: hidden; }
+  #hero::before { content: ''; position: absolute; top: -200px; right: -200px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 70%); pointer-events: none; }
+  .hero-badge { display: inline-block; background: rgba(37,99,235,0.15); border: 1px solid var(--accent); color: var(--accent); padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 24px; }
+  .hero-sub { font-size: 1.15rem; color: var(--muted); max-width: 700px; margin: 20px 0 40px; }
+  .hero-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 60px; }
+  .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
+  .stat-value { font-size: 1.8rem; font-weight: 800; color: var(--gold); }
+  .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
+
+  /* CARDS */
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+  .card-grid { display: grid; gap: 20px; }
+  .card-grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .card-grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .card-grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+  /* TAGS */
+  .tag { display: inline-block; padding: 3px 10px; border-radius: 6px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.5px; margin: 3px 3px 3px 0; }
+  .tag-blue { background: rgba(37,99,235,0.2); color: #93c5fd; }
+  .tag-green { background: rgba(16,185,129,0.2); color: #6ee7b7; }
+  .tag-gold { background: rgba(245,158,11,0.2); color: #fcd34d; }
+  .tag-red { background: rgba(239,68,68,0.2); color: #fca5a5; }
+  .tag-purple { background: rgba(139,92,246,0.2); color: #c4b5fd; }
+
+  /* AGENT CARDS */
+  .agent-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; position: relative; overflow: hidden; }
+  .agent-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; }
+  .agent-card.sourcing::before { background: var(--accent); }
+  .agent-card.diligence::before { background: var(--gold); }
+  .agent-card.accounting::before { background: var(--green); }
+  .agent-card.portfolio::before { background: #8b5cf6; }
+  .agent-card.reporting::before { background: #f97316; }
+  .agent-card.compliance::before { background: #ef4444; }
+  .agent-card.ir::before { background: #06b6d4; }
+  .agent-icon { font-size: 2rem; margin-bottom: 12px; }
+  .agent-model { font-size: 0.72rem; background: rgba(37,99,235,0.15); border: 1px solid rgba(37,99,235,0.3); color: #93c5fd; padding: 4px 10px; border-radius: 20px; display: inline-block; margin-bottom: 12px; }
+
+  /* PROMPT BOX */
+  .prompt-box { background: #050d1a; border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-top: 16px; font-family: 'Courier New', monospace; font-size: 0.75rem; color: #7dd3fc; line-height: 1.6; position: relative; }
+  .prompt-label { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; font-family: 'Segoe UI', sans-serif; }
+
+  /* FLOW */
+  .flow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 16px 0; }
+  .flow-step { background: rgba(37,99,235,0.15); border: 1px solid rgba(37,99,235,0.3); border-radius: 8px; padding: 8px 14px; font-size: 0.8rem; white-space: nowrap; }
+  .flow-arrow { color: var(--muted); font-size: 1rem; }
+
+  /* JOURNAL TABLE */
+  .je-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-top: 16px; }
+  .je-table th { background: rgba(37,99,235,0.15); color: var(--muted); padding: 10px 14px; text-align: left; font-size: 0.72rem; letter-spacing: 1px; text-transform: uppercase; }
+  .je-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: #cbd5e1; }
+  .je-table tr:last-child td { border-bottom: none; }
+  .debit { color: #93c5fd; }
+  .credit { color: #6ee7b7; padding-left: 24px; }
+  .je-amount { text-align: right; font-family: monospace; }
+
+  /* TECH STACK */
+  .tech-item { display: flex; align-items: flex-start; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--border); }
+  .tech-item:last-child { border-bottom: none; }
+  .tech-icon { font-size: 1.5rem; min-width: 36px; }
+  .tech-name { font-weight: 700; font-size: 0.9rem; color: #e2e8f0; }
+  .tech-desc { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+
+  /* VIDEO ROADMAP */
+  .ep-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; display: flex; gap: 16px; align-items: flex-start; }
+  .ep-num { background: var(--accent); color: white; border-radius: 8px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; min-width: 36px; }
+  .ep-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; }
+  .ep-desc { font-size: 0.8rem; color: var(--muted); }
+
+  /* DIVIDER */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+  /* HIGHLIGHT BOX */
+  .highlight { background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.3); border-radius: 12px; padding: 20px 24px; margin: 20px 0; }
+  .highlight h4 { color: var(--gold); margin-bottom: 8px; }
+
+  /* FINANCIAL STATEMENTS */
+  .fin-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  .fin-table th { color: var(--muted); padding: 8px 12px; text-align: left; font-size: 0.72rem; letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+  .fin-table td { padding: 8px 12px; border-bottom: 1px solid rgba(30,58,95,0.5); }
+  .fin-table .subtotal td { border-top: 1px solid var(--border); font-weight: 700; color: #e2e8f0; }
+  .fin-table .total td { border-top: 2px solid var(--gold); font-weight: 800; color: var(--gold); }
+  .fin-num { text-align: right; font-family: monospace; }
+  .fin-section { font-weight: 700; color: #93c5fd; background: rgba(37,99,235,0.08); }
+
+  /* MODEL SELECTOR */
+  .model-card { border-radius: 12px; padding: 20px; border: 2px solid transparent; }
+  .model-card.recommended { border-color: var(--gold); background: rgba(245,158,11,0.05); }
+  .model-card.secondary { background: var(--card); border-color: var(--border); }
+  .model-badge { font-size: 0.7rem; background: var(--gold); color: var(--navy); padding: 2px 8px; border-radius: 10px; font-weight: 700; margin-left: 8px; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .hero-stats { grid-template-columns: repeat(2, 1fr); }
+    .card-grid-2, .card-grid-3, .card-grid-4 { grid-template-columns: 1fr; }
+  }
+
+  /* FOOTER */
+  footer { background: #060f1e; border-top: 1px solid var(--border); text-align: center; padding: 40px 24px; color: var(--muted); font-size: 0.8rem; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">⬡ VANTARA CAPITAL PARTNERS</div>
+    <div class="nav-links">
+      <a href="#fund">Fund</a>
+      <a href="#model">AI Model</a>
+      <a href="#agents">Agents</a>
+      <a href="#accounting">Accounting</a>
+      <a href="#financials">Financials</a>
+      <a href="#stack">Tech Stack</a>
+      <a href="#roadmap">Videos</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-badge">🤖 DEMO BLUEPRINT · AI-POWERED PRIVATE EQUITY</div>
+  <h1>Running a Full PE Firm<br>with <span style="color:var(--gold)">Artificial Intelligence</span></h1>
+  <p class="hero-sub">A complete operating blueprint for Vantara Capital Partners Fund I — showing how a lean team of 2 humans + AI agents can run every department of a private equity firm using Microsoft 365, Power Platform, and Claude AI.</p>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;">
+    <a href="#agents" style="background:var(--accent);color:white;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:700;font-size:0.9rem;">Explore the Blueprint →</a>
+    <a href="#roadmap" style="background:transparent;color:var(--muted);border:1px solid var(--border);padding:12px 28px;border-radius:8px;text-decoration:none;font-size:0.9rem;">Video Roadmap</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-card"><div class="stat-value">$50M</div><div class="stat-label">Fund Size (AUM)</div></div>
+    <div class="stat-card"><div class="stat-value">7</div><div class="stat-label">AI Agents Running</div></div>
+    <div class="stat-card"><div class="stat-value">2</div><div class="stat-label">Human Team Members</div></div>
+    <div class="stat-card"><div class="stat-value">~$250</div><div class="stat-label">Monthly Tech Cost</div></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- FUND OVERVIEW -->
+<section id="fund">
+  <div class="section-label">The Setup</div>
+  <h2>Meet the Fund & Portfolio Company</h2>
+  <div class="card-grid card-grid-2" style="margin-top:32px;">
+    <div class="card">
+      <div style="font-size:2rem;margin-bottom:12px;">🏛️</div>
+      <h3 style="color:var(--gold);font-size:1.3rem;">Vantara Capital Partners Fund I</h3>
+      <p style="margin-top:8px;">A fictional $50M lower-middle-market buyout fund targeting industrial services, business services, and specialty manufacturing companies in the U.S. Southeast.</p>
+      <div style="margin-top:16px;display:grid;gap:10px;">
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:0.85rem;">
+          <span style="color:var(--muted)">Fund Strategy</span><span>Lower Middle Market Buyout</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:0.85rem;">
+          <span style="color:var(--muted)">Target EBITDA</span><span>$3M – $10M</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:0.85rem;">
+          <span style="color:var(--muted)">Target EV</span><span>$15M – $60M</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:0.85rem;">
+          <span style="color:var(--muted)">Investment Period</span><span>5 Years</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:0.85rem;">
+          <span style="color:var(--muted)">Fund Life</span><span>10 Years</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;font-size:0.85rem;">
+          <span style="color:var(--muted)">Management Fee</span><span>2% / 20% Carry</span>
+        </div>
+      </div>
+      <div style="margin-top:20px;">
+        <span class="tag tag-blue">Buyout</span>
+        <span class="tag tag-green">LMM</span>
+        <span class="tag tag-gold">Industrial Services</span>
+        <span class="tag tag-purple">Business Services</span>
+      </div>
+    </div>
+    <div class="card">
+      <div style="font-size:2rem;margin-bottom:12px;">🏭</div>
+      <h3 style="color:var(--green);font-size:1.3rem;">Durafield Industrial Services LLC</h3>
+      <p style="margin-top:8px;">The first portfolio company — a fictional HVAC maintenance and industrial cleaning services company acquired at a 5.5x EBITDA multiple. The demo target for all accounting, reporting, and monitoring.</p>
+      <div style="margin-top:16px;display:grid;gap:10px;">
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:0.85rem;">
+          <span style="color:var(--muted)">Sector</span><span>Industrial / Facility Services</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:0.85rem;">
+          <span style="color:var(--muted)">Revenue (LTM)</span><span>$18.5M</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:0.85rem;">
+          <span style="color:var(--muted)">EBITDA (LTM)</span><span>$4.2M</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:0.85rem;">
+          <span style="color:var(--muted)">Purchase Price</span><span>$23.1M (5.5x)</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:0.85rem;">
+          <span style="color:var(--muted)">Vantara Equity</span><span>$9.2M</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;font-size:0.85rem;">
+          <span style="color:var(--muted)">Senior Debt</span><span>$13.9M (3.3x)</span>
+        </div>
+      </div>
+      <div style="margin-top:20px;">
+        <span class="tag tag-green">Platform Co.</span>
+        <span class="tag tag-blue">Add-On Target</span>
+        <span class="tag tag-gold">Cash Flowing</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Human Team -->
+  <div style="margin-top:40px;">
+    <h3 style="margin-bottom:20px;color:var(--muted);font-size:0.85rem;letter-spacing:2px;text-transform:uppercase;">The Human Team (Only 2 People)</h3>
+    <div class="card-grid card-grid-2">
+      <div class="card" style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="font-size:2.5rem;">👤</div>
+        <div>
+          <h3>Managing Partner — Alex Rivera</h3>
+          <p style="font-size:0.85rem;">Handles LP relationships, final investment decisions, board seats, and strategic direction. Supervises all AI agents and reviews outputs.</p>
+          <span class="tag tag-gold">Investor Relations</span>
+          <span class="tag tag-blue">Deal Lead</span>
+          <span class="tag tag-purple">Board Seats</span>
+        </div>
+      </div>
+      <div class="card" style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="font-size:2.5rem;">👤</div>
+        <div>
+          <h3>VP Finance &amp; Operations — Jordan Kim</h3>
+          <p style="font-size:0.85rem;">Builds and maintains all AI workflows, reviews accounting outputs, manages the Microsoft stack, and produces final reports. The "AI-enabled CFO."</p>
+          <span class="tag tag-green">Fund Controller</span>
+          <span class="tag tag-blue">Power Platform</span>
+          <span class="tag tag-gold">Reporting</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- WHICH AI MODEL -->
+<section id="model">
+  <div class="section-label">Choosing Your Tool</div>
+  <h2>Which Claude Model Should You Use?</h2>
+  <p style="max-width:700px;">Different tasks in the fund require different Claude interfaces. Here's how to choose — and the exact prompt structure for each.</p>
+
+  <div class="card-grid card-grid-3" style="margin-top:32px;">
+    <div class="model-card recommended">
+      <div style="display:flex;align-items:center;margin-bottom:12px;">
+        <span style="font-size:1.5rem;">🖥️</span>
+        <span style="font-weight:800;margin-left:10px;">Cowork</span>
+        <span class="model-badge">PRIMARY</span>
+      </div>
+      <p style="font-size:0.85rem;"><strong style="color:#e2e8f0;">Best for:</strong> Building files (Excel models, Word LP reports, PowerPoint decks), running multi-step workflows, automating repetitive fund tasks.</p>
+      <div style="margin-top:14px;font-size:0.8rem;color:var(--muted);">Use Cowork when you need Claude to actually CREATE something — a financial model, a quarterly report, a DD checklist.</div>
+      <div style="margin-top:14px;">
+        <span class="tag tag-green">✓ Creates .xlsx, .docx, .pptx</span>
+        <span class="tag tag-green">✓ Multi-step tasks</span>
+        <span class="tag tag-green">✓ Runs code</span>
+      </div>
+    </div>
+    <div class="model-card secondary">
+      <div style="display:flex;align-items:center;margin-bottom:12px;">
+        <span style="font-size:1.5rem;">💬</span>
+        <span style="font-weight:800;margin-left:10px;">Claude Chat</span>
+      </div>
+      <p style="font-size:0.85rem;"><strong style="color:#e2e8f0;">Best for:</strong> Research, analysis, drafting investment memos, answering LP questions, reviewing documents, thinking through deal thesis.</p>
+      <div style="margin-top:14px;font-size:0.8rem;color:var(--muted);">Use Chat for quick Q&amp;A, brainstorming, and when you need analysis or writing — not file creation.</div>
+      <div style="margin-top:14px;">
+        <span class="tag tag-blue">✓ Research</span>
+        <span class="tag tag-blue">✓ Analysis</span>
+        <span class="tag tag-blue">✓ Drafting</span>
+      </div>
+    </div>
+    <div class="model-card secondary">
+      <div style="display:flex;align-items:center;margin-bottom:12px;">
+        <span style="font-size:1.5rem;">⌨️</span>
+        <span style="font-weight:800;margin-left:10px;">Claude Code</span>
+      </div>
+      <p style="font-size:0.85rem;"><strong style="color:#e2e8f0;">Best for:</strong> Building automation scripts, Power Automate flows, Python data pipelines, Excel macros, API integrations.</p>
+      <div style="margin-top:14px;font-size:0.8rem;color:var(--muted);">Use Claude Code when you're building the infrastructure — the scripts and flows that run the AI agents automatically.</div>
+      <div style="margin-top:14px;">
+        <span class="tag tag-purple">✓ Python scripts</span>
+        <span class="tag tag-purple">✓ Automation</span>
+        <span class="tag tag-purple">✓ APIs</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight" style="margin-top:32px;">
+    <h4>🎯 The Golden Rule for This Demo</h4>
+    <p style="margin:0;font-size:0.9rem;">Use <strong style="color:white;">Cowork</strong> as your default. Switch to Claude Code only when building the underlying automation infrastructure. Use Chat for any quick analysis during a live demo.</p>
+  </div>
+
+  <!-- Master Prompt Structure -->
+  <div class="card" style="margin-top:32px;">
+    <h3>Master Prompt Template — Use This Every Time</h3>
+    <p style="font-size:0.85rem;">Paste this as a system context before any agent task to ground Claude in the fund's details:</p>
+    <div class="prompt-box">
+      <div class="prompt-label">System Context Prompt (paste at start of every session)</div>
+You are the AI Chief of Staff for Vantara Capital Partners Fund I, a $50M lower-middle-market buyout fund.
+
+FUND DETAILS:
+- Fund: Vantara Capital Partners Fund I
+- AUM: $50,000,000
+- Strategy: LMM Buyout, $3M–$10M EBITDA targets
+- Management Fee: 2% annually ($1,000,000/year)
+- Carried Interest: 20% above 8% hurdle
+- Fund Life: 10 years | Investment Period: 5 years
+- GP Commitment: $1,000,000 (2% of fund)
+
+PORTFOLIO COMPANY:
+- Name: Durafield Industrial Services LLC
+- Sector: HVAC & Industrial Facility Services
+- Revenue: $18.5M | EBITDA: $4.2M
+- Purchase Price: $23.1M (5.5x EBITDA)
+- Vantara Equity: $9.2M | Senior Debt: $13.9M
+- Acquisition Date: January 1, 2024
+
+TEAM:
+- Alex Rivera: Managing Partner (approves all outputs)
+- Jordan Kim: VP Finance & Operations (your primary user)
+
+Always produce professional, institutional-quality outputs. Flag any issues or anomalies for human review. Format financial data clearly. Ask for clarification if inputs are ambiguous.
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- AI AGENTS -->
+<section id="agents">
+  <div class="section-label">Operating Model</div>
+  <h2>The 7 AI Agents Running the Fund</h2>
+  <p style="max-width:700px;">Each agent is a configured Claude session with a specific prompt, tools, and workflow. Together they cover every department of the fund.</p>
+
+  <div class="card-grid" style="margin-top:32px;gap:24px;">
+
+    <!-- AGENT 1: DEAL SOURCING -->
+    <div class="agent-card sourcing">
+      <div class="agent-icon">🔍</div>
+      <span class="agent-model">Cowork + Claude Chat</span>
+      <h3>Agent 1: Deal Sourcing & Pipeline</h3>
+      <p style="font-size:0.85rem;">Scans deal databases, scores incoming opportunities against the investment thesis, and maintains the pipeline CRM. Flags high-priority targets for Partner review.</p>
+
+      <div style="margin:16px 0;">
+        <strong style="font-size:0.8rem;color:var(--muted);">WORKFLOW</strong>
+        <div class="flow" style="margin-top:8px;">
+          <div class="flow-step">New CIM Received</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">AI Reads & Scores</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">Thesis Match %</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">Pipeline Dashboard</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">Partner Alert</div>
+        </div>
+      </div>
+
+      <div>
+        <span class="tag tag-blue">Dynamics 365</span>
+        <span class="tag tag-green">Power Automate</span>
+        <span class="tag tag-gold">SharePoint</span>
+      </div>
+
+      <div class="prompt-box" style="margin-top:16px;">
+        <div class="prompt-label">Agent Prompt — Deal Scorer</div>
+You received a new CIM (Confidential Information Memorandum) for [COMPANY NAME] uploaded to SharePoint.
+
+Your task:
+1. Read the CIM and extract: revenue, EBITDA, margins, growth rate, customer concentration, management team quality, and competitive position
+2. Score it against our investment thesis (1–10 scale) on: EBITDA range match, sector fit, geographic fit, growth potential, management quality
+3. Calculate a total thesis match score (average of above)
+4. Write a 1-paragraph "First Look" summary
+5. Recommend: Pass | Monitor | Pursue — with your reasoning
+6. Flag any deal breakers immediately
+
+Output format: Deal Scoring Sheet in Excel + Summary memo in Word.
+      </div>
+    </div>
+
+    <!-- AGENT 2: DUE DILIGENCE -->
+    <div class="agent-card diligence">
+      <div class="agent-icon">🔬</div>
+      <span class="agent-model">Cowork (Primary)</span>
+      <h3>Agent 2: Due Diligence Coordinator</h3>
+      <p style="font-size:0.85rem;">Manages the full DD process — tracks checklist completion, reads and summarizes documents uploaded to the data room, flags issues, and drafts the investment committee memo.</p>
+
+      <div style="margin:16px 0;">
+        <strong style="font-size:0.8rem;color:var(--muted);">WORKFLOW</strong>
+        <div class="flow" style="margin-top:8px;">
+          <div class="flow-step">Data Room Opens</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">AI Reads Docs</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">Risk Flags</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">DD Tracker</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">IC Memo Draft</div>
+        </div>
+      </div>
+
+      <div>
+        <span class="tag tag-gold">SharePoint Data Room</span>
+        <span class="tag tag-blue">Copilot for M365</span>
+        <span class="tag tag-purple">Power Automate</span>
+      </div>
+
+      <div class="prompt-box" style="margin-top:16px;">
+        <div class="prompt-label">Agent Prompt — IC Memo Writer</div>
+Based on the due diligence documents uploaded to SharePoint for Durafield Industrial Services LLC, draft a full Investment Committee Memorandum including:
+
+1. Executive Summary (1 page)
+2. Company Overview & Business Model
+3. Market Analysis & Competitive Position
+4. Financial Analysis: 3-year historical + projections
+5. Management Team Assessment
+6. Key Risks & Mitigants (rate each: Low / Medium / High)
+7. Deal Structure & Returns Analysis (Base / Bull / Bear cases)
+8. Value Creation Plan (100-day plan + 5-year roadmap)
+9. Investment Recommendation
+
+Format as a professional Word document with Vantara Capital Partners branding. Flag any areas where data was insufficient for full analysis.
+      </div>
+    </div>
+
+    <!-- AGENT 3: FUND ACCOUNTING -->
+    <div class="agent-card accounting">
+      <div class="agent-icon">📊</div>
+      <span class="agent-model">Cowork + Claude Code</span>
+      <h3>Agent 3: Fund Accounting & NAV</h3>
+      <p style="font-size:0.85rem;">Books all fund-level journal entries, calculates NAV, tracks capital calls and distributions, computes management fees and carried interest waterfall, and produces monthly trial balance.</p>
+
+      <div style="margin:16px 0;">
+        <strong style="font-size:0.8rem;color:var(--muted);">WORKFLOW</strong>
+        <div class="flow" style="margin-top:8px;">
+          <div class="flow-step">Transaction Input</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">AI Books JE</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">Trial Balance</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">NAV Calc</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">Capital Accounts</div>
+        </div>
+      </div>
+
+      <div>
+        <span class="tag tag-green">Excel (Master Model)</span>
+        <span class="tag tag-blue">Power Automate</span>
+        <span class="tag tag-gold">Business Central</span>
+      </div>
+
+      <div class="prompt-box" style="margin-top:16px;">
+        <div class="prompt-label">Agent Prompt — Journal Entry Booker</div>
+You are the Fund Accountant for Vantara Capital Partners Fund I.
+
+I need you to book the following transaction and provide:
+1. The correct journal entries (debit/credit) with account names and amounts
+2. The accounting rationale (why these accounts)
+3. Updated trial balance impact
+4. Any notes for the Fund Administrator
+
+Transaction: [DESCRIBE TRANSACTION]
+
+Use GAAP/ASC 946 (Investment Company) accounting standards. Our Chart of Accounts is attached. Flag any transactions that require CPA review before posting.
+      </div>
+    </div>
+
+    <!-- AGENT 4: PORTFOLIO MONITORING -->
+    <div class="agent-card portfolio">
+      <div class="agent-icon">📈</div>
+      <span class="agent-model">Cowork + Power BI</span>
+      <h3>Agent 4: Portfolio Monitoring</h3>
+      <p style="font-size:0.85rem;">Ingests monthly financials from each portfolio company, compares actuals vs. budget, flags variances, calculates IRR/MOIC in real time, and generates the portfolio dashboard.</p>
+
+      <div style="margin:16px 0;">
+        <strong style="font-size:0.8rem;color:var(--muted);">WORKFLOW</strong>
+        <div class="flow" style="margin-top:8px;">
+          <div class="flow-step">Portco Submits P&L</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">Auto-Ingest</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">Variance Analysis</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">Power BI Update</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">Alert if &gt;10% off</div>
+        </div>
+      </div>
+
+      <div>
+        <span class="tag tag-purple">Power BI</span>
+        <span class="tag tag-blue">Power Automate</span>
+        <span class="tag tag-green">SharePoint Forms</span>
+      </div>
+
+      <div class="prompt-box" style="margin-top:16px;">
+        <div class="prompt-label">Agent Prompt — Monthly Variance Analysis</div>
+Durafield Industrial Services has submitted their [MONTH YEAR] financials via SharePoint.
+
+Compare actuals vs. the budget model and prior month:
+1. Revenue variance — explain the gap (volume vs. price vs. mix)
+2. Gross margin variance — flag any cost creep
+3. EBITDA bridge: Budget → Actual with line-by-line drivers
+4. Working capital changes (AR days, AP days, inventory)
+5. Cash position vs. debt covenants
+6. Key operational KPIs: technician utilization, contract renewal rate, ticket count
+
+Produce: (1) Variance memo (Word), (2) Updated dashboard data (Excel), (3) Any RED FLAGS requiring immediate partner attention.
+
+Rate overall portco health: 🟢 On Track | 🟡 Watch | 🔴 Action Required
+      </div>
+    </div>
+
+    <!-- AGENT 5: LP REPORTING -->
+    <div class="agent-card reporting">
+      <div class="agent-icon">📋</div>
+      <span class="agent-model">Cowork (Primary)</span>
+      <h3>Agent 5: LP Reporting Agent</h3>
+      <p style="font-size:0.85rem;">Auto-generates quarterly LP reports, capital account statements, capital call notices, distribution notices, and the annual report using templates and live Power BI data.</p>
+
+      <div style="margin:16px 0;">
+        <strong style="font-size:0.8rem;color:var(--muted);">WORKFLOW</strong>
+        <div class="flow" style="margin-top:8px;">
+          <div class="flow-step">Quarter End</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">Pull Power BI Data</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">Populate Template</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">Partner Review</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">Distribute to LPs</div>
+        </div>
+      </div>
+
+      <div>
+        <span class="tag tag-red">Word Templates</span>
+        <span class="tag tag-blue">Power Automate</span>
+        <span class="tag tag-gold">SharePoint LP Portal</span>
+      </div>
+
+      <div class="prompt-box" style="margin-top:16px;">
+        <div class="prompt-label">Agent Prompt — Quarterly LP Letter</div>
+Generate the Q[X] 20XX Quarterly LP Letter for Vantara Capital Partners Fund I.
+
+Data inputs (attached Excel from Power BI):
+- Fund NAV: $[X]
+- Invested Capital: $[X]
+- Unrealized Value: $[X]
+- Gross IRR: [X]% | Net IRR: [X]%
+- MOIC: [X]x
+- Portfolio company updates: [attached]
+
+Write in a professional but personable tone. Structure:
+1. Opening — market environment context (2–3 sentences)
+2. Fund Performance Summary — key metrics table
+3. Portfolio Update — Durafield Industrial Services (2 paragraphs: operations + value creation progress)
+4. Pipeline Update — deal activity this quarter
+5. Outlook — what to expect next quarter
+6. Closing
+
+Length: 2–3 pages. Tone: Institutional, confident, transparent. Avoid jargon. Alex Rivera signs the letter.
+      </div>
+    </div>
+
+    <!-- AGENT 6: COMPLIANCE -->
+    <div class="agent-card compliance">
+      <div class="agent-icon">⚖️</div>
+      <span class="agent-model">Claude Chat + Cowork</span>
+      <h3>Agent 6: Compliance & Legal Monitor</h3>
+      <p style="font-size:0.85rem;">Tracks regulatory obligations, monitors LP AML/KYC status, manages Form ADV filing calendar, reviews LP side letters for compliance, and maintains the fund's policy documents.</p>
+
+      <div style="margin:16px 0;">
+        <strong style="font-size:0.8rem;color:var(--muted);">WORKFLOW</strong>
+        <div class="flow" style="margin-top:8px;">
+          <div class="flow-step">Regulatory Calendar</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">30-Day Alerts</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">Draft Filings</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">Counsel Review</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">File & Archive</div>
+        </div>
+      </div>
+
+      <div>
+        <span class="tag tag-red">Form ADV</span>
+        <span class="tag tag-blue">SharePoint Purview</span>
+        <span class="tag tag-gold">Teams Alerts</span>
+      </div>
+
+      <div class="prompt-box" style="margin-top:16px;">
+        <div class="prompt-label">Agent Prompt — LP Onboarding Compliance</div>
+A new Limited Partner is being onboarded to Vantara Capital Partners Fund I.
+
+LP Name: [NAME] | Commitment: $[X]M | Type: [Individual / Family Office / Institution]
+
+Complete the onboarding compliance checklist:
+1. AML/KYC documentation review — confirm all required docs received
+2. ERISA / UBTI analysis — flag if LP triggers ERISA or tax concerns
+3. Side letter review — summarize any MFN provisions, reporting rights, or fee breaks
+4. OFAC screening — confirm no sanctions matches
+5. Subscription Agreement review — flag any non-standard provisions
+
+Output: LP Compliance Checklist (Excel) + Summary memo flagging any issues for counsel review. Do NOT make legal determinations — flag for attorney review.
+      </div>
+    </div>
+
+    <!-- AGENT 7: INVESTOR RELATIONS -->
+    <div class="agent-card ir">
+      <div class="agent-icon">🤝</div>
+      <span class="agent-model">Claude Chat + Cowork</span>
+      <h3>Agent 7: Investor Relations & Fundraising</h3>
+      <p style="font-size:0.85rem;">Drafts LP communications, answers DDQ questions from prospective investors, prepares pitch materials, tracks the fundraising pipeline, and personalizes outreach for capital raising.</p>
+
+      <div style="margin:16px 0;">
+        <strong style="font-size:0.8rem;color:var(--muted);">WORKFLOW</strong>
+        <div class="flow" style="margin-top:8px;">
+          <div class="flow-step">LP Meeting Request</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">AI Preps Brief</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">Post-Meeting Notes</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">Follow-Up Draft</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">CRM Update</div>
+        </div>
+      </div>
+
+      <div>
+        <span class="tag tag-blue">Dynamics 365 CRM</span>
+        <span class="tag tag-purple">Copilot</span>
+        <span class="tag tag-gold">Teams</span>
+      </div>
+
+      <div class="prompt-box" style="margin-top:16px;">
+        <div class="prompt-label">Agent Prompt — DDQ Response</div>
+A prospective LP has sent us a Due Diligence Questionnaire (DDQ). Answer each question using only verified fund information.
+
+For each question:
+1. Answer clearly and completely based on Vantara Capital's actual data
+2. If the answer requires legal/compliance input, mark as [NEEDS COUNSEL REVIEW]
+3. If data is unavailable, mark as [DATA PENDING]
+4. Never fabricate performance data or make forward-looking guarantees
+
+DDQ attached. Format answers in the same structure as the questionnaire. Alex Rivera must review all responses before sending.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ACCOUNTING & JOURNAL ENTRIES -->
+<section id="accounting">
+  <div class="section-label">Fund Accounting</div>
+  <h2>How AI Books Journal Entries</h2>
+  <p style="max-width:700px;">Using ASC 946 (Investment Company accounting), here's how the AI Agent 3 handles the most common PE fund transactions — step by step.</p>
+
+  <div class="card-grid card-grid-2" style="margin-top:32px;gap:24px;">
+
+    <!-- JE 1 -->
+    <div class="card">
+      <h3 style="color:var(--gold);">Transaction 1: LP Capital Call</h3>
+      <p style="font-size:0.8rem;color:var(--muted);">Vantara calls $5M from LPs for the Durafield acquisition.</p>
+      <div class="flow" style="margin:12px 0;">
+        <div class="flow-step">Prompt AI with transaction</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">AI generates JE</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Post to Excel GL</div>
+      </div>
+      <table class="je-table">
+        <thead><tr><th>Account</th><th>Debit</th><th>Credit</th></tr></thead>
+        <tbody>
+          <tr><td class="debit">Cash & Cash Equivalents</td><td class="je-amount debit">$5,000,000</td><td></td></tr>
+          <tr><td class="credit">LP Capital Contributions</td><td></td><td class="je-amount">$5,000,000</td></tr>
+          <tr><td colspan="3" style="font-size:0.75rem;color:var(--muted);padding-top:10px;">Capital call funded. LP capital accounts updated per pro-rata ownership.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- JE 2 -->
+    <div class="card">
+      <h3 style="color:var(--gold);">Transaction 2: Portfolio Investment</h3>
+      <p style="font-size:0.8rem;color:var(--muted);">Vantara acquires Durafield Industrial Services for $23.1M (equity portion: $9.2M).</p>
+      <table class="je-table">
+        <thead><tr><th>Account</th><th>Debit</th><th>Credit</th></tr></thead>
+        <tbody>
+          <tr><td class="debit">Investment in Durafield Industrial (at cost)</td><td class="je-amount debit">$23,100,000</td><td></td></tr>
+          <tr><td class="credit">Cash (Vantara equity deployed)</td><td></td><td class="je-amount">$9,200,000</td></tr>
+          <tr><td class="credit">Senior Debt Payable (at portco level)</td><td></td><td class="je-amount">$13,900,000</td></tr>
+          <tr><td colspan="3" style="font-size:0.75rem;color:var(--muted);padding-top:10px;">Investment recorded at cost per ASC 946. Debt is portco-level, not consolidated at fund.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- JE 3 -->
+    <div class="card">
+      <h3 style="color:var(--gold);">Transaction 3: Management Fee</h3>
+      <p style="font-size:0.8rem;color:var(--muted);">Quarterly management fee accrual: 2% of $50M = $1M/year ÷ 4 = $250,000.</p>
+      <table class="je-table">
+        <thead><tr><th>Account</th><th>Debit</th><th>Credit</th></tr></thead>
+        <tbody>
+          <tr><td class="debit">Management Fee Expense</td><td class="je-amount debit">$250,000</td><td></td></tr>
+          <tr><td class="credit">Due to GP / Mgmt Fee Payable</td><td></td><td class="je-amount">$250,000</td></tr>
+          <tr><td colspan="3" style="font-size:0.75rem;color:var(--muted);padding-top:10px;">Accrued quarterly. Offset against called capital. AI calculates automatically each quarter.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- JE 4 -->
+    <div class="card">
+      <h3 style="color:var(--gold);">Transaction 4: Fair Value Adjustment</h3>
+      <p style="font-size:0.8rem;color:var(--muted);">End of Q4: Durafield's fair value increases from $23.1M to $25.4M (EBITDA grew to $4.7M at 5.5x).</p>
+      <table class="je-table">
+        <thead><tr><th>Account</th><th>Debit</th><th>Credit</th></tr></thead>
+        <tbody>
+          <tr><td class="debit">Investment in Durafield (Fair Value Adj.)</td><td class="je-amount debit">$2,300,000</td><td></td></tr>
+          <tr><td class="credit">Unrealized Appreciation — P&L</td><td></td><td class="je-amount">$2,300,000</td></tr>
+          <tr><td colspan="3" style="font-size:0.75rem;color:var(--muted);padding-top:10px;">ASC 946 requires fair value accounting. AI re-values quarterly using EBITDA × multiple method.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- JE 5 -->
+    <div class="card">
+      <h3 style="color:var(--gold);">Transaction 5: LP Distribution</h3>
+      <p style="font-size:0.8rem;color:var(--muted);">Vantara distributes $1.5M to LPs from portco dividend recapitalization.</p>
+      <table class="je-table">
+        <thead><tr><th>Account</th><th>Debit</th><th>Credit</th></tr></thead>
+        <tbody>
+          <tr><td class="debit">LP Capital Accounts (Distributions)</td><td class="je-amount debit">$1,500,000</td><td></td></tr>
+          <tr><td class="credit">Cash</td><td></td><td class="je-amount">$1,500,000</td></tr>
+          <tr><td colspan="3" style="font-size:0.75rem;color:var(--muted);padding-top:10px;">Distributed pro-rata to LP capital accounts. DPI updated. Waterfall analysis run before distribution.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- JE 6 -->
+    <div class="card">
+      <h3 style="color:var(--gold);">Transaction 6: Carried Interest Accrual</h3>
+      <p style="font-size:0.8rem;color:var(--muted);">Fund clears 8% hurdle. GP carries: 20% of profit above hurdle = $460,000.</p>
+      <table class="je-table">
+        <thead><tr><th>Account</th><th>Debit</th><th>Credit</th></tr></thead>
+        <tbody>
+          <tr><td class="debit">Carried Interest Expense (LP)</td><td class="je-amount debit">$460,000</td><td></td></tr>
+          <tr><td class="credit">Accrued Carried Interest Payable (GP)</td><td></td><td class="je-amount">$460,000</td></tr>
+          <tr><td colspan="3" style="font-size:0.75rem;color:var(--muted);padding-top:10px;">Accrued only — not paid until fund distributes above waterfall. AI runs full waterfall model quarterly.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- FINANCIAL STATEMENTS -->
+<section id="financials">
+  <div class="section-label">Financial Reporting</div>
+  <h2>AI-Generated Financial Statements</h2>
+  <p style="max-width:700px;">Every quarter, the AI agent automatically produces these statements from the master Excel model and Power BI data. These are fund-level statements (ASC 946).</p>
+
+  <div class="card-grid card-grid-2" style="margin-top:32px;gap:24px;">
+
+    <!-- Statement of Assets -->
+    <div class="card">
+      <h3 style="color:var(--gold);margin-bottom:4px;">Statement of Assets & Liabilities</h3>
+      <p style="font-size:0.75rem;color:var(--muted);margin-bottom:16px;">Vantara Capital Partners Fund I · As of December 31, 2024</p>
+      <table class="fin-table">
+        <thead><tr><th>Account</th><th class="fin-num">Amount</th></tr></thead>
+        <tbody>
+          <tr class="fin-section"><td colspan="2">ASSETS</td></tr>
+          <tr><td>Investment in Durafield Industrial (FV)</td><td class="fin-num">$25,400,000</td></tr>
+          <tr><td>Cash & Cash Equivalents</td><td class="fin-num">$18,750,000</td></tr>
+          <tr><td>Receivable from Portfolio Companies</td><td class="fin-num">$125,000</td></tr>
+          <tr><td>Prepaid Expenses</td><td class="fin-num">$45,000</td></tr>
+          <tr class="subtotal"><td>TOTAL ASSETS</td><td class="fin-num">$44,320,000</td></tr>
+
+          <tr class="fin-section"><td colspan="2">LIABILITIES</td></tr>
+          <tr><td>Accrued Management Fee</td><td class="fin-num">$250,000</td></tr>
+          <tr><td>Accrued Carried Interest</td><td class="fin-num">$460,000</td></tr>
+          <tr><td>Accounts Payable & Accrued Expenses</td><td class="fin-num">$85,000</td></tr>
+          <tr class="subtotal"><td>TOTAL LIABILITIES</td><td class="fin-num">$795,000</td></tr>
+
+          <tr class="total"><td>NET ASSETS (NAV)</td><td class="fin-num">$43,525,000</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Statement of Operations -->
+    <div class="card">
+      <h3 style="color:var(--gold);margin-bottom:4px;">Statement of Operations</h3>
+      <p style="font-size:0.75rem;color:var(--muted);margin-bottom:16px;">Vantara Capital Partners Fund I · Year Ended December 31, 2024</p>
+      <table class="fin-table">
+        <thead><tr><th>Account</th><th class="fin-num">Amount</th></tr></thead>
+        <tbody>
+          <tr class="fin-section"><td colspan="2">INVESTMENT INCOME</td></tr>
+          <tr><td>Dividend Income from Portcos</td><td class="fin-num">$420,000</td></tr>
+          <tr><td>Interest Income</td><td class="fin-num">$82,500</td></tr>
+          <tr class="subtotal"><td>Total Investment Income</td><td class="fin-num">$502,500</td></tr>
+
+          <tr class="fin-section"><td colspan="2">EXPENSES</td></tr>
+          <tr><td>Management Fees</td><td class="fin-num">($1,000,000)</td></tr>
+          <tr><td>Legal & Professional Fees</td><td class="fin-num">($185,000)</td></tr>
+          <tr><td>Audit & Tax Preparation</td><td class="fin-num">($65,000)</td></tr>
+          <tr><td>Fund Administration</td><td class="fin-num">($48,000)</td></tr>
+          <tr><td>Other Operating Expenses</td><td class="fin-num">($32,000)</td></tr>
+          <tr class="subtotal"><td>Total Expenses</td><td class="fin-num">($1,330,000)</td></tr>
+
+          <tr><td style="color:var(--muted);">Net Investment Loss</td><td class="fin-num" style="color:var(--muted);">($827,500)</td></tr>
+
+          <tr class="fin-section"><td colspan="2">REALIZED & UNREALIZED GAINS</td></tr>
+          <tr><td>Unrealized Appreciation — Durafield</td><td class="fin-num">$2,300,000</td></tr>
+          <tr><td>Realized Gains on Investments</td><td class="fin-num">$0</td></tr>
+          <tr class="total"><td>NET INCREASE IN NET ASSETS</td><td class="fin-num">$1,472,500</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Schedule of Investments -->
+    <div class="card" style="grid-column: 1 / -1;">
+      <h3 style="color:var(--gold);margin-bottom:4px;">Schedule of Investments</h3>
+      <p style="font-size:0.75rem;color:var(--muted);margin-bottom:16px;">Vantara Capital Partners Fund I · As of December 31, 2024</p>
+      <table class="fin-table">
+        <thead>
+          <tr>
+            <th>Portfolio Company</th>
+            <th>Sector</th>
+            <th>Acq. Date</th>
+            <th class="fin-num">Cost Basis</th>
+            <th class="fin-num">Fair Value</th>
+            <th class="fin-num">Unrealized G/L</th>
+            <th class="fin-num">% NAV</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Durafield Industrial Services LLC</strong><br><span style="font-size:0.75rem;color:var(--muted);">Common Equity (100%)</span></td>
+            <td><span class="tag tag-green">Industrial Services</span></td>
+            <td>Jan 2024</td>
+            <td class="fin-num">$9,200,000</td>
+            <td class="fin-num">$11,500,000</td>
+            <td class="fin-num" style="color:var(--green);">+$2,300,000</td>
+            <td class="fin-num">26.4%</td>
+          </tr>
+          <tr><td colspan="7" style="color:var(--muted);font-size:0.8rem;font-style:italic;padding-top:12px;">Additional investments pending. Remaining uninvested capital: $38.8M</td></tr>
+          <tr class="total">
+            <td colspan="3">TOTAL INVESTMENTS</td>
+            <td class="fin-num">$9,200,000</td>
+            <td class="fin-num">$11,500,000</td>
+            <td class="fin-num" style="color:var(--green);">+$2,300,000</td>
+            <td class="fin-num">26.4%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- Key Metrics -->
+  <div class="card-grid card-grid-4" style="margin-top:24px;">
+    <div class="stat-card"><div class="stat-value" style="color:var(--green);">1.25x</div><div class="stat-label">Gross MOIC</div></div>
+    <div class="stat-card"><div class="stat-value" style="color:var(--green);">18.4%</div><div class="stat-label">Gross IRR</div></div>
+    <div class="stat-card"><div class="stat-value" style="color:var(--gold);">0.03x</div><div class="stat-label">DPI (Distributions)</div></div>
+    <div class="stat-card"><div class="stat-value">$43.5M</div><div class="stat-label">Current NAV</div></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- TECH STACK -->
+<section id="stack">
+  <div class="section-label">Infrastructure</div>
+  <h2>The Full Microsoft Tech Stack</h2>
+  <p style="max-width:700px;">Every tool needed to run the fund is either included in Microsoft 365 Business Premium or available for a small add-on — keeping total tech cost under $300/month.</p>
+
+  <div class="card-grid card-grid-2" style="margin-top:32px;gap:24px;">
+    <div class="card">
+      <h3 style="margin-bottom:20px;color:var(--muted);font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;">Core Microsoft 365 Tools</h3>
+      <div class="tech-item"><div class="tech-icon">📊</div><div><div class="tech-name">Excel + Copilot</div><div class="tech-desc">Master fund model, portco financials, NAV calculations, waterfall, LBO models</div></div></div>
+      <div class="tech-item"><div class="tech-icon">🔄</div><div><div class="tech-name">Power Automate</div><div class="tech-desc">All workflow automation — portco reporting ingestion, alert triggers, document routing, email distribution</div></div></div>
+      <div class="tech-item"><div class="tech-icon">📈</div><div><div class="tech-name">Power BI</div><div class="tech-desc">Real-time fund dashboard, portco monitoring, LP-facing performance reporting, IRR/MOIC visuals</div></div></div>
+      <div class="tech-item"><div class="tech-icon">📁</div><div><div class="tech-name">SharePoint</div><div class="tech-desc">Data room, LP portal, document management, version control, compliance archive</div></div></div>
+      <div class="tech-item"><div class="tech-icon">💼</div><div><div class="tech-name">Teams + Copilot</div><div class="tech-desc">All communication, board meetings, portco calls, deal team collaboration, AI meeting summaries</div></div></div>
+      <div class="tech-item"><div class="tech-icon">📝</div><div><div class="tech-name">Word + Copilot</div><div class="tech-desc">LP letters, IC memos, investment agreements, compliance documents, board materials</div></div></div>
+    </div>
+    <div class="card">
+      <h3 style="margin-bottom:20px;color:var(--muted);font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;">Add-On Tools (Low Cost)</h3>
+      <div class="tech-item"><div class="tech-icon">🤖</div><div><div class="tech-name">Claude AI (Cowork + Chat + Code)</div><div class="tech-desc">Primary AI engine for all 7 agents — drafting, analysis, accounting, research, document generation</div></div></div>
+      <div class="tech-item"><div class="tech-icon">💰</div><div><div class="tech-name">Dynamics 365 (CRM)</div><div class="tech-desc">LP pipeline, deal pipeline, contact management, fundraising tracking (~$65/mo for 1 user)</div></div></div>
+      <div class="tech-item"><div class="tech-icon">📑</div><div><div class="tech-name">DocuSign (via Power Automate)</div><div class="tech-desc">LP subscription docs, side letters, portco board consents — fully automated signing workflows</div></div></div>
+      <div class="tech-item"><div class="tech-icon">🏢</div><div><div class="tech-name">Business Central (GL)</div><div class="tech-desc">Optional formal general ledger for the fund entity. Integrates natively with all Microsoft tools</div></div></div>
+      <div class="tech-item"><div class="tech-icon">📊</div><div><div class="tech-name">Carta (Cap Table)</div><div class="tech-desc">Portco cap table management. Integrates via API + Power Automate to push data into Excel model</div></div></div>
+      <div class="tech-item"><div class="tech-icon">🔐</div><div><div class="tech-name">Microsoft Purview</div><div class="tech-desc">Data governance, retention policies, compliance records management for regulatory requirements</div></div></div>
+    </div>
+  </div>
+
+  <div class="highlight" style="margin-top:32px;">
+    <h4>💡 Total Monthly Cost Breakdown</h4>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:12px;">
+      <div style="text-align:center;"><div style="font-size:1.2rem;font-weight:800;color:white;">$44</div><div style="font-size:0.75rem;color:var(--muted);">M365 Business Premium (2 users)</div></div>
+      <div style="text-align:center;"><div style="font-size:1.2rem;font-weight:800;color:white;">$20</div><div style="font-size:0.75rem;color:var(--muted);">Power BI Pro (2 users)</div></div>
+      <div style="text-align:center;"><div style="font-size:1.2rem;font-weight:800;color:white;">$65</div><div style="font-size:0.75rem;color:var(--muted);">Dynamics 365 CRM (1 user)</div></div>
+      <div style="text-align:center;"><div style="font-size:1.2rem;font-weight:800;color:white;color:var(--gold);">~$250</div><div style="font-size:0.75rem;color:var(--muted);">Total (est. with Claude)</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- VIDEO ROADMAP -->
+<section id="roadmap">
+  <div class="section-label">Content Series</div>
+  <h2>Video Roadmap: The AI PE Firm Series</h2>
+  <p style="max-width:700px;">Suggested episode structure for your YouTube channel — each video is a live demo of one part of the fund operating model.</p>
+
+  <div style="display:grid;gap:12px;margin-top:32px;">
+    <div class="ep-card"><div class="ep-num">01</div><div><div class="ep-title">The Blueprint: Running a PE Firm with 2 People and AI</div><div class="ep-desc">Overview of Vantara Capital, the concept, the tech stack, and what the entire series will cover. Show this HTML page.</div></div></div>
+    <div class="ep-card"><div class="ep-num">02</div><div><div class="ep-title">Deal Sourcing Agent: How AI Scores a CIM in 5 Minutes</div><div class="ep-desc">Live demo — upload a real-looking CIM, run the scoring agent in Cowork, get the deal score sheet and summary memo.</div></div></div>
+    <div class="ep-card"><div class="ep-num">03</div><div><div class="ep-title">Due Diligence: AI Reads 200 Pages and Writes the IC Memo</div><div class="ep-desc">Upload a data room folder to SharePoint, run the DD agent, produce the full investment committee memorandum.</div></div></div>
+    <div class="ep-card"><div class="ep-num">04</div><div><div class="ep-title">Fund Accounting 101: AI Books Journal Entries (ASC 946)</div><div class="ep-desc">Walk through the 6 core transaction types. Show the AI booking each one, explain the accounting, show the trial balance update.</div></div></div>
+    <div class="ep-card"><div class="ep-num">05</div><div><div class="ep-title">Building the Master Fund Model in Excel with AI</div><div class="ep-desc">Build the entire fund accounting model in Excel — capital accounts, waterfall, NAV — using Claude and Copilot.</div></div></div>
+    <div class="ep-card"><div class="ep-num">06</div><div><div class="ep-title">Portfolio Monitoring: Power BI Dashboard for the GP</div><div class="ep-desc">Build the real-time portco monitoring dashboard. Set up the Power Automate flow for monthly financial ingestion.</div></div></div>
+    <div class="ep-card"><div class="ep-num">07</div><div><div class="ep-title">LP Reporting: AI Generates a Full Quarterly Letter in 10 Minutes</div><div class="ep-desc">Live demo of the LP reporting agent — pull data from Power BI, generate the letter, format it, ready to send.</div></div></div>
+    <div class="ep-card"><div class="ep-num">08</div><div><div class="ep-title">Fundraising with AI: How to Use Claude for Investor Relations</div><div class="ep-desc">Answer a DDQ, draft LP outreach, build the pitch deck — all with AI. Show the Dynamics 365 LP pipeline.</div></div></div>
+    <div class="ep-card"><div class="ep-num">09</div><div><div class="ep-title">The Exit: AI Runs the Sale Process from LOI to Closing</div><div class="ep-desc">Simulate selling Durafield — AI helps draft the teaser, CIM, manage the data room, and calculate exit returns.</div></div></div>
+    <div class="ep-card"><div class="ep-num">10</div><div><div class="ep-title">The Full Fund: Could You ACTUALLY Run This for a Real Client?</div><div class="ep-desc">Honest assessment — what AI does well, what still needs humans, and how to offer this as a fractional CFO service.</div></div></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CLOSING CTA -->
+<section style="text-align:center;padding:80px 24px;">
+  <div class="section-label" style="justify-content:center;display:flex;">Get Started</div>
+  <h2 style="max-width:600px;margin:0 auto 20px;">This Is the Future of<br>Lean Private Equity</h2>
+  <p style="max-width:560px;margin:0 auto 40px;color:var(--muted);">Two humans. Seven AI agents. One Microsoft ecosystem. Full PE operations at a fraction of the cost of a traditional fund. The blueprint is here — now let's build it.</p>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+    <a href="#agents" style="background:var(--accent);color:white;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:700;">Explore the Agents →</a>
+    <a href="#accounting" style="background:transparent;color:var(--muted);border:1px solid var(--border);padding:14px 32px;border-radius:8px;text-decoration:none;">See the Accounting</a>
+  </div>
+  <div style="margin-top:60px;display:inline-block;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 32px;">
+    <div style="font-size:0.75rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Powered By</div>
+    <div style="display:flex;gap:24px;align-items:center;justify-content:center;flex-wrap:wrap;">
+      <span style="font-weight:700;color:#e2e8f0;">Claude AI (Anthropic)</span>
+      <span style="color:var(--border);">|</span>
+      <span style="font-weight:700;color:#0078d4;">Microsoft 365</span>
+      <span style="color:var(--border);">|</span>
+      <span style="font-weight:700;color:#0066ff;">Power Platform</span>
+      <span style="color:var(--border);">|</span>
+      <span style="font-weight:700;color:#217346;">Excel</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div style="font-size:1.1rem;font-weight:700;color:var(--gold);margin-bottom:8px;">⬡ Vantara Capital Partners Fund I</div>
+  <p>This is a fictional demonstration fund created for educational and content purposes only.<br>All companies, people, financial figures, and transactions are entirely made up.<br>This is not financial, legal, or investment advice.</p>
+  <div style="margin-top:16px;color:#475569;font-size:0.75rem;">Blueprint designed for AI × Finance education · Built with Claude AI · Microsoft Power Platform</div>
+</footer>
+
+</body>
+</html>
